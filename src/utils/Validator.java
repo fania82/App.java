@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class Validator {
 
     // Валидация ввода наименования
-    public static String validateName(Scanner scanner){
+    public static String validateName(Scanner scanner) {
         String str = scanner.nextLine().trim();
         while (str.isEmpty()) {
             System.out.println("Пусто! Введите наименование товара: ");
@@ -16,22 +16,17 @@ public class Validator {
     }
 
     // Валидация ввода количества
-    public static int validateQuantityInput(Scanner scanner){
-
-//       while (scanner.nextLine().trim().isEmpty()) {
-//           System.out.println("Пусто! Введите количество товара: ");
-//       }
-
-        while (!scanner.hasNextInt()) {
+    public static int validateQuantityInput(Scanner scanner) {
+        while (!(scanner.hasNextInt())) {
             String str = scanner.nextLine();
             System.out.printf("\"%s\" - не число!\n", str);
             System.out.println("Введите количество!: ");
         }
         int quantity = scanner.nextInt();
-        while (quantity <= 0){
+        while (quantity <= 0) {
             System.out.println("Неверное значение! Введите количество: ");
             while (!scanner.hasNextInt()) {
-               String str = scanner.next();
+                String str = scanner.next();
                 System.out.printf("\"%s\" - не число!\n", str);
                 System.out.println("Введите количество!: ");
             }
@@ -41,7 +36,7 @@ public class Validator {
     }
 
     // Валидация ввода цены
-    public static double validatePriceInput(Scanner scanner){
+    public static double validatePriceInput(Scanner scanner) {
         while (!scanner.hasNextDouble()) {
             String str = scanner.nextLine().trim();
             System.out.printf("\"%s\" - не число!\n", str);
@@ -50,10 +45,15 @@ public class Validator {
         double price = scanner.nextDouble();
         while (price <= 0) {
             System.out.println("Неверное значение! Введите цену: ");
-            // здесь, реализуйте уведомление о неверном формате
-            price = scanner.nextFloat();
+            while (!scanner.hasNextInt()) {
+                String str = scanner.next();
+                System.out.printf("\"%s\" - не число!\n", str);
+                System.out.println("Введите количество!: ");
+            }
+            price = scanner.nextDouble();
         }
         return price;
     }
 }
+
 
