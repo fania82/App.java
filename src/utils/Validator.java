@@ -1,58 +1,40 @@
 package utils;
 
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
-// Валидатор ввода значений
 public class Validator {
+    public static BufferedReader READER = new BufferedReader(new InputStreamReader(System.in));
 
-    // Валидация ввода наименования
-    public static String validateName(Scanner scanner) {
-        String str = scanner.nextLine().trim();
+    public static String validateName() throws IOException {
+        String str = READER.readLine();
         while (str.isEmpty()) {
-            System.out.println("Пусто! Введите наименование товара: ");
-            str = scanner.nextLine().trim();
+            System.out.println("Empty, add value: ");
+            str = READER.readLine();
         }
         return str;
     }
 
-    // Валидация ввода количества
-    public static int validateQuantityInput(Scanner scanner) {
-        while (!(scanner.hasNextInt())) {
-            String str = scanner.nextLine();
-            System.out.printf("\"%s\" - не число!\n", str);
-            System.out.println("Введите количество!: ");
+    public static int validateYearInput() throws IOException {
+        int inputNumber = Integer.parseInt(READER.readLine());
+        while (inputNumber < 1000 || inputNumber > 2022) {
+            System.out.printf("\"%s\" - not valid!\n", inputNumber);
+            System.out.println("Input correct value!: ");
+            inputNumber = Integer.parseInt(READER.readLine());
         }
-        int quantity = scanner.nextInt();
-        while (quantity <= 0) {
-            System.out.println("Неверное значение! Введите количество: ");
-            while (!scanner.hasNextInt()) {
-                String str = scanner.next();
-                System.out.printf("\"%s\" - не число!\n", str);
-                System.out.println("Введите количество!: ");
-            }
-            quantity = scanner.nextInt();
-        }
-        return quantity;
+        return inputNumber;
     }
 
-    // Валидация ввода цены
-    public static double validatePriceInput(Scanner scanner) {
-        while (!scanner.hasNextDouble()) {
-            String str = scanner.nextLine().trim();
-            System.out.printf("\"%s\" - не число!\n", str);
-            System.out.println("Введите цену!: ");
+    public static int validateActionNumberInput() throws IOException {
+        int actionNumber = Integer.parseInt(READER.readLine());
+        while (actionNumber !=1 && actionNumber !=2 && actionNumber!=3 && actionNumber!=4) {
+            System.out.printf("\"%s\" - not valid \n", actionNumber);
+            System.out.println("Input correct value!: ");
+            actionNumber = Integer.parseInt(READER.readLine());
         }
-        double price = scanner.nextDouble();
-        while (price <= 0) {
-            System.out.println("Неверное значение! Введите цену: ");
-            while (!scanner.hasNextInt()) {
-                String str = scanner.next();
-                System.out.printf("\"%s\" - не число!\n", str);
-                System.out.println("Введите количество!: ");
-            }
-            price = scanner.nextDouble();
-        }
-        return price;
+        return actionNumber;
+
     }
 }
 
