@@ -7,20 +7,12 @@ import java.io.IOException;
 
 public class AuthorView {
 
-    Author author;
-
-    public AuthorView(Author author) {
-        this.author = author;
-    }
-
-    public void getInputs() throws IOException {
+    public static Author getAuthorInputs() throws IOException {
+        Author author = new Author();
         System.out.println("Input Author first name: ");
         author.setFirstName(Validator.validateName());
         System.out.println("Input Author last name: ");
         author.setLastName(Validator.validateName());
-    }
-
-    public void getOutput(String output) {
-        System.out.println(output);
+        return author;
     }
 }

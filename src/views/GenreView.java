@@ -3,22 +3,25 @@ package views;
 import models.Genre;
 import utils.Validator;
 import java.io.IOException;
+import java.util.List;
 
 public class GenreView {
 
-    Genre genre;
-    String title;
-    public GenreView(Genre genre) {
-        this.genre = genre;
-    }
+    public static Genre getGenreInputs() throws IOException {
+        Genre genre = new Genre();
 
-    public void getGenreInputs() throws IOException {
-        title = "Input name of genre: ";
-        System.out.println(title);
+        System.out.println("Input name of genre: ");
         genre.setName(Validator.validateName());
-        title = "Input description of genre: ";
-        System.out.println(title);
+
+        System.out.println("Input description of genre: ");
         genre.setDescription(Validator.validateName());
+        return genre;
 }
+    public static void printGenres(List<Genre> GENRES) {
+        int index=0;
+        for (Genre genreList : GENRES) {
+            System.out.println((index++) + ": " + genreList);
+        }
+    }
 
 }
