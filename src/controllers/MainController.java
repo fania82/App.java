@@ -1,26 +1,27 @@
 package controllers;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import static utils.Validator.validateActionNumberInput;
 
 public class MainController {
-    public static BufferedReader READER = new BufferedReader(new InputStreamReader(System.in));
 
     public void runApp() throws IOException {
-        System.out.println("Choose action: 1 - add genre, 2 - add Author, 3 - add book, 4 - exit");
+        printMainAction();
         int chooseMainAction = validateActionNumberInput();
-        while (chooseMainAction != 4) {
+        do {
             switch (chooseMainAction) {
-                case 1:
-                    GenreController.chooseGenreAction();
-                case 2:
-                    AuthorController.chooseAuthorAction();
-                case 3:
-                    BookController.chooseBookActions();
+                case 1 -> GenreController.chooseGenreAction();
+                case 2 -> AuthorController.chooseAuthorAction();
+                case 3 -> BookController.chooseBookActions();
             }
-            System.out.println("Choose action: 1 - add genre, 2 - add Author, 3 - add book, 4 - exit");
-            chooseMainAction = Integer.parseInt(READER.readLine());
-        }
+            printMainAction();
+            chooseMainAction = validateActionNumberInput();
+        } while (chooseMainAction != 4);
+    }
+
+    public static void printAction(String str){
+        System.out.println("Choose action: 1 - add new " + str + ", 2 - remove exist " +  str + ", 3 - print all " + str + "s, 4 - exit");
+    }
+    public static void printMainAction(){
+        System.out.println("Choose action: 1 - add Genre, 2 - add Author, 3 - add Book, 4 - exit");
     }
 }

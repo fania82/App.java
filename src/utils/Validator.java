@@ -1,5 +1,4 @@
 package utils;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -16,28 +15,14 @@ public class Validator {
         return str;
     }
 
-    public static int validateYearInput() throws IOException {
-        int inputNumber = Integer.parseInt(READER.readLine());
-        while (inputNumber < 1000 || inputNumber > 2022) {
-            System.out.printf("\"%s\" - not valid!\n", inputNumber);
-            System.out.println("Input correct value!: ");
-            inputNumber = Integer.parseInt(READER.readLine());
+    public static Integer validateActionNumberInput() {
+        try {
+            System.out.println("input number:");
+            String str = READER.readLine();
+            return Integer.parseInt(str);
+        } catch (Exception exception) {
+            System.out.println("Error: " + exception.getMessage());
         }
-        return inputNumber;
-    }
-
-    public static int validateActionNumberInput() throws IOException {
-        int actionNumber = Integer.parseInt(READER.readLine());
-        while (actionNumber !=1 && actionNumber !=2 && actionNumber!=3 && actionNumber!=4) {
-            System.out.printf("\"%s\" - not valid \n", actionNumber);
-            System.out.println("Input correct value!: ");
-            actionNumber = Integer.parseInt(READER.readLine());
-        }
-        return actionNumber;
-
-
-
+        return validateActionNumberInput();
     }
 }
-
-

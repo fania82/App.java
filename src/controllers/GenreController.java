@@ -1,43 +1,53 @@
 package controllers;
-
 import models.Genre;
-import views.BookView;
 import views.GenreView;
-
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
-
 import static utils.Validator.validateActionNumberInput;
 import static views.GenreView.printGenres;
 
 public class GenreController {
-    public static BufferedReader READER = new BufferedReader(new InputStreamReader(System.in));
+
     public static List<Genre> GENRES = new ArrayList<>();
 
     static void chooseGenreAction() throws IOException {
-        System.out.println("Choose action: 1 - Add new genre, 2 - delete genre, 3 - print all created genres, 4 - exit");
+        MainController.printAction("Genre");
         int chooseActionForGenres = validateActionNumberInput();
         while (chooseActionForGenres != 4) {
             switch (chooseActionForGenres) {
-                case 1 -> {
-                    Genre genre = GenreView.getGenreInputs();
-                    GENRES.add(genre);
-                    System.out.println("New genre is added");
-                }
-                case 2 -> {
-                    printGenres(GENRES);
-                    System.out.println("input index for remove");
-                    int removeIndex = Integer.parseInt(READER.readLine());
-                    GENRES.remove(removeIndex);
-                }
-                case 3 -> printGenres(GENRES);
+                case 1 -> addGenre();
+                case 2 -> removeGenre();
+                case 3 -> printGenreList();
             }
-            System.out.println("Choose action: 1 - Add new genre, 2 - delete genre, 3 - print all created genres, 4 - exit");
-            chooseActionForGenres = Integer.parseInt(READER.readLine());
+            MainController.printAction("Genre");
+            chooseActionForGenres = validateActionNumberInput();
         }
     }
 
+    private static void printGenreList() {
+        if (GENRES.isEmpty()) {
+            System.out.println("No one Genre is exist. Please add at least one Genre");
+        } else {
+            printGenres(GENRES);
+        }
+    }
+
+    private static void removeGenre() {
+        if (GENRES.isEmpty()) {
+            System.out.println("No one genre is exist. Please add at least one Genre");
+        } else {
+            printGenres(GENRES);
+            System.out.println("For remove please input index");
+            int removeIndex = validateActionNumberInput();
+            GENRES.remove(removeIndex);
+            System.out.println("Genre is removed");
+        }
+    }
+
+    private static void addGenre() throws IOException {
+        Genre genre = GenreView.getGenreInputs();
+        GENRES.add(genre);
+        System.out.println("New genre is added");
+    }
 }

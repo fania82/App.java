@@ -9,10 +9,8 @@ public class GenreView {
 
     public static Genre getGenreInputs() throws IOException {
         Genre genre = new Genre();
-
         System.out.println("Input name of genre: ");
         genre.setName(Validator.validateName());
-
         System.out.println("Input description of genre: ");
         genre.setDescription(Validator.validateName());
         return genre;
